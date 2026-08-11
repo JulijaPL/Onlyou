@@ -7,7 +7,7 @@ public abstract class NPC_ : MonoBehaviour, Interactable
 
     private Transform _playerTransform;
 
-    private const float INTERACT_DISTANCE = 2f;
+    private const float INTERACT_DISTANCE = 1f;
 
     private void Start()
     {

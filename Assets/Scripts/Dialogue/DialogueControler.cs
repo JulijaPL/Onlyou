@@ -13,8 +13,9 @@ public class DialogueControler : MonoBehaviour
     private string p;
     public void DisplayNextParagraphs(DialogueText dialogueText)
     {
+        Debug.Log("DISPLAY NEXT PARAGRAPH WYKONANE");
         // if theres is nothing in the queue
-        if(paragraphs.Count == 0)
+        if (paragraphs.Count == 0)
         {
             if (!conversationEnded)
             {
@@ -29,7 +30,9 @@ public class DialogueControler : MonoBehaviour
             }
         }
         // if there is something in the queue
+
         p = paragraphs.Dequeue();
+        Debug.Log("DISPLAY NEXT PARAGRAPH WYKONANE");
 
         //update conversation text
         NPCDialogueText.text = p;
@@ -45,6 +48,7 @@ public class DialogueControler : MonoBehaviour
     {
         if(!gameObject.activeSelf)
         {
+            Debug.Log("W£¥CZAM DIALOG BOX");
             gameObject.SetActive(true);
         }
         // speaker name
