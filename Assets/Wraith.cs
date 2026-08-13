@@ -14,6 +14,6 @@ public class Wraith : NPC_, ITalkable
     public void Talk(DialogueText dialogueText)
     {
         Debug.Log("WRAITH: PRÓBUJÊ URUCHOMIÆ DIALOG");
-        dialogueControler.DisplayNextParagraphs( dialogueText);
+        dialogueControler.DisplayNextParagraphs( dialogueText, transform);
     }
 }

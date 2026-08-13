@@ -6,17 +6,23 @@ public class DialogueControler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI NPCNameText;
     [SerializeField] private TextMeshProUGUI NPCDialogueText;
 
+    [SerializeField] private Transform currentSpeaker;
+    [SerializeField] private Vector3 dialogueOffset = new Vector3(0f, 0.35f,0f);
+    [SerializeField] private RectTransform dialogueBox;
+
     private Queue<string> paragraphs = new Queue<string>();
 
     private bool conversationEnded;
 
     private string p;
-    public void DisplayNextParagraphs(DialogueText dialogueText)
+    public void DisplayNextParagraphs(DialogueText dialogueText, Transform speaker)
     {
-        Debug.Log("DISPLAY NEXT PARAGRAPH WYKONANE");
+       
         // if theres is nothing in the queue
         if (paragraphs.Count == 0)
         {
+            currentSpeaker = speaker;
+
             if (!conversationEnded)
             {
                 // start a conversation
@@ -32,7 +38,7 @@ public class DialogueControler : MonoBehaviour
         // if there is something in the queue
 
         p = paragraphs.Dequeue();
-        Debug.Log("DISPLAY NEXT PARAGRAPH WYKONANE");
+       
 
         //update conversation text
         NPCDialogueText.text = p;
@@ -46,9 +52,10 @@ public class DialogueControler : MonoBehaviour
 
     private void StartConversation(DialogueText dialogueText)
     {
+        dialogueBox.gameObject.SetActive(true);
         if(!gameObject.activeSelf)
         {
-            Debug.Log("W£¥CZAM DIALOG BOX");
+           
             gameObject.SetActive(true);
         }
         // speaker name
@@ -75,5 +82,13 @@ public class DialogueControler : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+    private void LateUpdate()
+    {
+        if (currentSpeaker == null)
+            return;
+
+        Vector3 screenPosition  = Camera.main.WorldToScreenPoint(currentSpeaker.position + dialogueOffset);
+        dialogueBox.position = screenPosition;
     }
 }
