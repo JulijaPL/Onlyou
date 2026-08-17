@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PLayer_movement : MonoBehaviour
 {
-    [SerializeField] float speed = 1.0f;
+    [SerializeField] float speed = 0.8f;
    Rigidbody2D rb;
     Vector2 input;
    
