@@ -25,6 +25,8 @@ public class Player_Attack_ : MonoBehaviour
             isAnimating = true;
 
         animator.SetTrigger("Attack");
+
+       
     }
 
         public void AnimationFinished()
