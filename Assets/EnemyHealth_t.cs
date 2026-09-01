@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class EnemyHealth_t : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private int health = 2;
+
     void Start()
     {
         
@@ -12,5 +13,21 @@ public class EnemyHealth_t : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void TakeDamage( int damage )
+    {
+        health -= damage;
+
+        if( health <= 0 )
+        {
+            Die();
+        }
+
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
