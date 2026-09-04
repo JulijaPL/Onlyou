@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class EnemyHealth_t : MonoBehaviour
 {
-    [SerializeField] private int health = 2;
-   
-   public Sprite Sprite;
+    [SerializeField] private int maxHealth = 2;
+   private int health;  
+   public SpriteRenderer Spriterenderer;
+
+    private EnemyPool pool;
+    private Color originalColor;
     void Start()
     {
-        
+     
+        Spriterenderer = GetComponent<SpriteRenderer>();
+        originalColor = Spriterenderer.color;
+        pool = FindObjectOfType<EnemyPool>();
     }
 
     // Update is called once per frame
@@ -33,14 +39,21 @@ public class EnemyHealth_t : MonoBehaviour
     private void Die()
     {
        
-        Destroy(gameObject);
+     Spriterenderer.color = originalColor;
+        pool.OnEnemyDeath(gameObject);
     }
 
     IEnumerator ColorChange()
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
+        Spriterenderer.color = Color.red;
         yield return new WaitForSeconds(4f);
 
         Die();
+    }
+
+    private void OnEnable()
+    {
+      
+        health = maxHealth;
     }
 }
