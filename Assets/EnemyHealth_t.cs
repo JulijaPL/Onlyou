@@ -10,12 +10,16 @@ public class EnemyHealth_t : MonoBehaviour
 
     private EnemyPool pool;
     private Color originalColor;
+
+    public EnemyFollowPlayer stunned;
+    private bool isDead = false;
     void Start()
     {
      
         Spriterenderer = GetComponent<SpriteRenderer>();
         originalColor = Spriterenderer.color;
-        pool = FindObjectOfType<EnemyPool>();
+        pool = FindFirstObjectByType<EnemyPool>();
+        stunned = FindFirstObjectByType<EnemyFollowPlayer>();
     }
 
     // Update is called once per frame
@@ -26,21 +30,27 @@ public class EnemyHealth_t : MonoBehaviour
 
     public void TakeDamage( int damage )
     {
+       // if( !isDead ) return;
+
         health -= damage;
 
         
         if ( health <= 0 )
         {
-          StartCoroutine(ColorChange());
+        //  isDead = true;
+           stunned.isStunned = true;
+            StartCoroutine(ColorChange());
         }
 
     }
 
     private void Die()
     {
-       
+      
      Spriterenderer.color = originalColor;
+        stunned.isStunned = false;
         pool.OnEnemyDeath(gameObject);
+       
     }
 
     IEnumerator ColorChange()
@@ -55,5 +65,6 @@ public class EnemyHealth_t : MonoBehaviour
     {
       
         health = maxHealth;
+        //isDead = false;
     }
 }

@@ -106,6 +106,7 @@ MonoBehaviour:
   followDistance: 1
   stopFollowDistance: 2
   speed: 0.2
+  isStunned: 0
   following: 0
 --- !u!50 &7318575683493694897
 Rigidbody2D:
@@ -148,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   Spriterenderer: {fileID: 4728756538499232021}
+  stunned: {fileID: 0}
 --- !u!70 &5382891580599196221
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
