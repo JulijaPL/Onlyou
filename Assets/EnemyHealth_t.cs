@@ -13,14 +13,20 @@ public class EnemyHealth_t : MonoBehaviour
 
     public EnemyFollowPlayer stunned;
     private bool isDead = false;
+
+   
+    private bloodPool bloodPool;
     void Start()
     {
-     
+        
         Spriterenderer = GetComponent<SpriteRenderer>();
         originalColor = Spriterenderer.color;
         pool = FindFirstObjectByType<EnemyPool>();
         stunned = FindFirstObjectByType<EnemyFollowPlayer>();
+        bloodPool = FindFirstObjectByType<bloodPool>();
     }
+
+   
 
     // Update is called once per frame
     void Update()
@@ -33,8 +39,9 @@ public class EnemyHealth_t : MonoBehaviour
        // if( !isDead ) return;
 
         health -= damage;
-
+        SpawnBlood();
         
+
         if ( health <= 0 )
         {
         //  isDead = true;
@@ -49,12 +56,14 @@ public class EnemyHealth_t : MonoBehaviour
       
      Spriterenderer.color = originalColor;
         stunned.isStunned = false;
+        
         pool.OnEnemyDeath(gameObject);
        
     }
 
     IEnumerator ColorChange()
     {
+       
         Spriterenderer.color = Color.red;
         yield return new WaitForSeconds(4f);
 
@@ -66,5 +75,22 @@ public class EnemyHealth_t : MonoBehaviour
       
         health = maxHealth;
         //isDead = false;
+    }
+
+    private void SpawnBlood()
+    {
+        Debug.Log("Dzia³a?");
+        GameObject blood = bloodPool.UpdateBlood();
+        blood.transform.position = transform.position;
+
+        SpriteRenderer sr = blood.GetComponent<SpriteRenderer>();
+        Color color = sr.color;
+        color.a = 1f;
+        sr.color = color;
+
+        blood.SetActive(true);
+        
+
+        
     }
 }
