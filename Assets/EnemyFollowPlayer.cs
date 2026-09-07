@@ -15,12 +15,23 @@ public class EnemyFollowPlayer : MonoBehaviour
     {
       player = GameObject.FindGameObjectWithTag("Player").transform;
     }
+    void FollowPlayer()
+    {
+
+        Vector2 direction = (player.position - transform.position).normalized;
+        if (isStunned)
+        {
+            Debug.Log("stop");
+            direction = Vector2.zero;
+        }
+        transform.position += (Vector3)direction * speed * Time.deltaTime;
+    }
 
     // Update is called once per frame
     void Update()
     {
         float distance = Vector2.Distance(transform.position, player.position);
-
+       
 
         if(!following &&  distance <= followDistance )
         {
@@ -30,7 +41,7 @@ public class EnemyFollowPlayer : MonoBehaviour
         {
             following = false;
         }
-        if (following)
+        if (following && !isStunned)
         {
             FollowPlayer();
         }
@@ -38,14 +49,8 @@ public class EnemyFollowPlayer : MonoBehaviour
 
        
     }
-    void FollowPlayer()
-    {
+    
+       
+    
 
-        Vector2 direction = (player.position - transform.position).normalized;
-        if (isStunned)
-        {
-            direction = Vector2.zero;
-        }
-        transform.position += (Vector3)direction * speed * Time.deltaTime;
-    }
 }
