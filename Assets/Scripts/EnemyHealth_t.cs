@@ -16,6 +16,8 @@ public class EnemyHealth_t : MonoBehaviour
 
    
     private bloodPool bloodPool;
+
+    public PlayerHealth TG;
     void Start()
     {
         
@@ -24,6 +26,7 @@ public class EnemyHealth_t : MonoBehaviour
         pool = FindFirstObjectByType<EnemyPool>();
         stunned = GetComponent<EnemyFollowPlayer>();
         bloodPool = FindFirstObjectByType<bloodPool>();
+        TG = FindAnyObjectByType<PlayerHealth>();
     }
 
    
@@ -93,4 +96,15 @@ public class EnemyHealth_t : MonoBehaviour
 
         
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Player")&& !isDead)
+        {
+            Debug.Log("zadano obra¿enie");
+            TG.TakeDamage(1);
+        }
+    }
+  
+
 }
