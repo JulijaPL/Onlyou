@@ -59,7 +59,9 @@ public class EnemyHealth_t : MonoBehaviour
       
      Spriterenderer.color = originalColor;
         stunned.isStunned = false;
-        
+
+        teethManager.Instance.AddTeeth(2);
+
         pool.OnEnemyDeath(gameObject);
        
     }
