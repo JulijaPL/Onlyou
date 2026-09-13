@@ -26,6 +26,11 @@ public class PlayerHealth : MonoBehaviour
         if(hp < 0) hp=0;
 
         UpdateHeartsUI();
+
+        if (hp <= 0) 
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 
     private void UpdateHeartsUI()
