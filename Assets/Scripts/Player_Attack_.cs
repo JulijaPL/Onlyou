@@ -18,7 +18,8 @@ public class Player_Attack_ : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0) && !isAnimating)
+        
+        if (Input.GetMouseButtonDown(0) && !isAnimating)
         {
             StartAnimation();
         }
@@ -30,8 +31,8 @@ public class Player_Attack_ : MonoBehaviour
             isAnimating = true;
 
         animator.SetTrigger("Attack");
-
        
+
     }
 
         public void AnimationFinished()
